@@ -4,11 +4,6 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-const SEED_PATIENTS = [
-  { nome: 'Carlos Eduardo Souza', cpf: '321.654.987-00', telefone: '(31) 96543-2109', convenio: 'Bradesco Saude', created_at: '2026-04-10' },
-  { nome: 'Lucia Helena Martins', cpf: '654.987.321-00', telefone: '(41) 95432-1098', convenio: 'Particular', created_at: '2026-04-05' },
-]
-
 interface Patient {
   nome?: string
   cpf?: string
@@ -18,6 +13,11 @@ interface Patient {
   created_at?: string
   [key: string]: string | undefined
 }
+
+const SEED_PATIENTS: Patient[] = [
+  { nome: 'Carlos Eduardo Souza', cpf: '321.654.987-00', telefone: '(31) 96543-2109', convenio: 'Bradesco Saude', created_at: '2026-04-10' },
+  { nome: 'Lucia Helena Martins', cpf: '654.987.321-00', telefone: '(41) 95432-1098', convenio: 'Particular', created_at: '2026-04-05' },
+]
 
 export default function PatientsPage() {
   const router = useRouter()
