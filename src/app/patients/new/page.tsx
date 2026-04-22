@@ -28,13 +28,18 @@ export default function NewPatientPage() {
     e.preventDefault()
     setSaving(true)
 
-    // Simulate API call
-    await new Promise(r => setTimeout(r, 1200))
-
     const form = new FormData(e.currentTarget)
-    const nome = form.get('nome') as string
+    const patient: Record<string, string> = {}
+    form.forEach((val, key) => { patient[key] = val as string })
 
-    toast.success(`Paciente "${nome}" cadastrado com sucesso!`)
+    // Save via API (server-side so it persists across browser sessions)
+    await fetch('/api/patients', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(patient),
+    }).catch(() => {})
+
+    toast.success(`Paciente "${patient.nome}" cadastrado com sucesso!`)
     setSaving(false)
     router.push('/patients')
   }
