@@ -53,6 +53,18 @@ export default function SubmissionsPage() {
             </p>
           </div>
           <div className="flex items-center gap-2">
+            {patients.length > 0 && (
+              <button
+                onClick={() => {
+                  fetch('/api/patients', { method: 'DELETE' })
+                    .then(() => { setPatients([]); })
+                    .catch(() => {})
+                }}
+                className="px-3 py-2 text-xs text-gray-400 border border-gray-700 rounded-lg hover:text-red-400 hover:border-red-500/30 hover:bg-red-500/5 transition-colors"
+              >
+                Limpar tudo
+              </button>
+            )}
             <button
               onClick={fetchData}
               className="px-3 py-2 text-xs text-gray-400 border border-gray-700 rounded-lg hover:text-white hover:bg-gray-800 transition-colors"
